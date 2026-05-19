@@ -9,7 +9,7 @@
      "restart": "pm2 restart DANUWA-MD"
     },
   "dependencies": {
-    "@whiskeysockets/baileys": "npm:pro-baileys",
+    "@whiskeysockets/baileys": "npm:gifted-baileys",
     "qrcode": "^1.5.3",
     "awesome-phonenumber": "^2.64.0",
     "pino": "^8.1.0",
