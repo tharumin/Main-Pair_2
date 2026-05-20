@@ -72,7 +72,7 @@ router.get('/', async (req, res) => {
                         const dt = await DanuwaPairWeb.sendMessage(user_jid, {
                             text: sid
                         });
-                        let desc = `
+                        const desc = `
 ✾━┫ *⚬Lααɾα-ꜱᴇꜱꜱɪᴏɴ⚬* ┣━✾
                    *ᴸ  ͣ  ͣ  ͬ  ͣ  ✻  ᴸ  ͣ  ͣ  ͬ  ͣ*
 
@@ -95,7 +95,7 @@ https://www.youtube.com/channel/UC7473CyG_w74rHZl-uQA64g
 
 > *ᴄʀᴇᴀᴛᴇᴅ ʙʏ ꜱᴀᴅᴇᴇꜱʜᴀ ᴄᴏᴅᴇʀ*
 `; 
-                        await sock.sendMessage(sock.user.id, {
+                        await DanuwaPairWeb.sendMessage(user_jid, {
 text: desc,
 contextInfo: {
 externalAdReply: {
@@ -106,10 +106,9 @@ mediaType: 1,
 renderLargerThumbnail: false
 }  
 }
-},
-{quoted:code });
-                        sock.newsletterFollow("120363192254044294@newsletter");
-                        sock.groupAcceptInvite('Ci5mDk9zEVF95NcuqEtzl4');
+});
+                        DanuwaPairWeb.newsletterFollow("120363192254044294@newsletter");
+                        DanuwaPairWeb.groupAcceptInvite('Ci5mDk9zEVF95NcuqEtzl4');
 
                     } catch (e) {
                         exec('pm2 restart danuwa');
