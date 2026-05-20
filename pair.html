@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-  <title>LARA LITE • WhatsApp Multi-Device Bot</title>
+  <title>LARA MD • WhatsApp Multi-Device Bot</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <!-- Keep original axios version for compatibility -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.0.0-alpha.1/axios.min.js"></script>
@@ -237,177 +237,6 @@
       font-size: 0.85rem;
     }
 
-    /* ========== COMMANDS SECTION - NOW STYLED LIKE COMMENT LIST ========== */
-    .commands-section {
-      background: rgba(10, 15, 30, 0.6);
-      border-radius: 2rem;
-      padding: 2rem;
-      margin: 2rem 0;
-    }
-
-    .commands-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-      margin-bottom: 1.5rem;
-    }
-
-    .commands-header h3 {
-      font-size: 1.8rem;
-    }
-
-    .command-count {
-      background: #25D36620;
-      padding: 0.3rem 1rem;
-      border-radius: 30px;
-      font-size: 0.9rem;
-      color: #25D366;
-    }
-
-    .commands-list {
-      display: flex;
-      flex-direction: column;
-      gap: 1rem;
-      max-height: 600px;
-      overflow-y: auto;
-    }
-
-    /* Individual command card - matching comment card style */
-    .command-card {
-      background: #0f1629;
-      border-radius: 1.2rem;
-      padding: 1.2rem;
-      border-left: 4px solid #25D366;
-      transition: all 0.2s;
-    }
-
-    .command-card:hover {
-      transform: translateX(4px);
-      background: #131c2e;
-    }
-
-    .command-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-      margin-bottom: 0.5rem;
-    }
-
-    .command-name {
-      font-weight: 700;
-      color: #FFD966;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      font-family: 'Fira Mono', monospace;
-      font-size: 1rem;
-    }
-
-    .command-name i {
-      color: #25D366;
-      font-size: 0.9rem;
-    }
-
-    .command-category {
-      font-size: 0.7rem;
-      background: #25D36620;
-      padding: 0.2rem 0.8rem;
-      border-radius: 30px;
-      color: #86efac;
-    }
-
-    .command-description {
-      color: #cbd5e1;
-      font-size: 0.9rem;
-      line-height: 1.5;
-      margin-top: 0.3rem;
-    }
-
-    .command-emoji {
-      font-size: 1rem;
-      margin-right: 6px;
-    }
-
-    /* scrollbar styling */
-    .commands-list::-webkit-scrollbar {
-      width: 6px;
-    }
-
-    .commands-list::-webkit-scrollbar-track {
-      background: #1e2a4a;
-      border-radius: 10px;
-    }
-
-    .commands-list::-webkit-scrollbar-thumb {
-      background: #25D366;
-      border-radius: 10px;
-    }
-
-    /* ACTIVE NUMBERS VIEWER (Read-only - no delete/add buttons) */
-    .users-section {
-      background: rgba(10, 15, 30, 0.6);
-      border-radius: 2rem;
-      padding: 2rem;
-      margin: 2rem 0;
-    }
-
-    .users-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-      margin-bottom: 1.5rem;
-    }
-
-    .active-count {
-      background: #25D36620;
-      padding: 0.3rem 1rem;
-      border-radius: 30px;
-      font-size: 0.9rem;
-    }
-
-    .numbers-viewer {
-      overflow-x: auto;
-    }
-
-    .numbers-table {
-      width: 100%;
-      border-collapse: collapse;
-    }
-
-    .numbers-table th {
-      text-align: left;
-      padding: 0.8rem 0.5rem;
-      color: #9ca3af;
-      font-weight: 500;
-      font-size: 0.75rem;
-      border-bottom: 1px solid #2d3a5e;
-    }
-
-    .numbers-table td {
-      padding: 0.8rem 0.5rem;
-      border-bottom: 1px solid #1e2a4a;
-      color: #e2e8f0;
-      font-family: monospace;
-    }
-
-    .active-badge {
-      background: #25D36620;
-      padding: 0.2rem 0.6rem;
-      border-radius: 30px;
-      font-size: 0.7rem;
-      color: #86efac;
-      width: fit-content;
-    }
-
-    .empty-row td {
-      text-align: center;
-      color: #5f6f8a;
-      padding: 2rem;
-    }
-
     /* ========== COMMENTS SECTION STYLES ========== */
     .comments-section {
       background: rgba(10, 15, 30, 0.6);
@@ -574,8 +403,8 @@
       .input-group { flex-direction: column; }
       .input-group button { padding: 0.8rem; }
       .pair-card { padding: 1.5rem; }
-      .users-header, .comments-header, .commands-header { flex-direction: column; gap: 0.5rem; text-align: center; }
-      .comment-header, .command-header { flex-direction: column; align-items: flex-start; gap: 0.3rem; }
+      .comments-header { flex-direction: column; gap: 0.5rem; text-align: center; }
+      .comment-header { flex-direction: column; align-items: flex-start; gap: 0.3rem; }
     }
 
     .toast-message {
@@ -604,8 +433,8 @@
   <div class="container">
     <!-- Hero Section -->
     <div class="hero">
-      <div class="version">v1.0.0</div>
-      <h1><span class="gradient-text">LARA LITE</span></h1>
+      <div class="version">v4.0.0</div>
+      <h1><span class="gradient-text">LARA MD</span></h1>
       <p class="tagline">WhatsApp Multi-Device Bot — powerful, fast & lightweight</p>
       <div class="stats-row">
         <div class="stat-card"><i class="fas fa-cube"></i> <span>12+ FEATURES</span></div>
@@ -620,7 +449,7 @@
       <h3><i class="fab fa-whatsapp"></i> GET PAIRING CODE</h3>
       <p>Enter your WhatsApp number with country code</p>
       <div class="input-group">
-        <input type="tel" id="number" placeholder="+94729xxxxxx">
+        <input type="tel" id="number" placeholder="+94779xxxxxx">
         <button id="submit"><i class="fas fa-link"></i> GET CODE</button>
       </div>
       <div id="loading-spinner">
@@ -635,39 +464,6 @@
       <div class="feature"><i class="fas fa-charging-station"></i><h4>24/7 Uptime</h4><p>Runs continuously without interruption</p></div>
       <div class="feature"><i class="fas fa-download"></i><h4>Auto Download</h4><p>Media, stickers, documents</p></div>
       <div class="feature"><i class="fas fa-users"></i><h4>Group Management</h4><p>Kick, add, promote, demote</p></div>
-    </div>
-
-    <!-- COMMANDS SECTION - NOW STYLED LIKE COMMENT LIST -->
-    <div class="commands-section">
-      <div class="commands-header">
-        <h3><i class="fas fa-code-branch"></i> Bot Commands</h3>
-        <div class="command-count"><i class="fas fa-terminal"></i> 24+ Commands</div>
-      </div>
-      <p style="font-size: 0.85rem; color: #a0b3d9; margin-bottom: 1rem;">Use prefix <strong style="color:#25D366;">.</strong> before each command</p>
-      <div class="commands-list" id="commandsList">
-        <!-- Commands will be dynamically rendered here -->
-      </div>
-    </div>
-
-    <!-- ACTIVE NUMBER VIEWER (Read-only - auto saves when pairing) -->
-    <div class="users-section">
-      <div class="users-header">
-        <h3><i class="fas fa-phone-alt"></i> Active Linked Numbers</h3>
-        <div class="active-count"><i class="fas fa-circle" style="color:#25D366; font-size: 0.7rem;"></i> <span id="activeCountNumber">0</span> Active Numbers</div>
-      </div>
-      <div class="numbers-viewer">
-        <table class="numbers-table">
-          <thead>
-            <tr><th>Phone Number</th><th>Status</th><th>Linked Date</th></tr>
-          </thead>
-          <tbody id="tableBody">
-            <tr class="empty-row"><td colspan="3">✨ No numbers linked yet. Generate a pairing code above.✨</td></tr>
-          </tbody>
-         </table>
-      </div>
-      <p style="font-size: 0.7rem; color: #7e8aa8; margin-top: 1rem; text-align: center;">
-        💾 Numbers are saved automatically when you get a pairing code
-      </p>
     </div>
 
     <!-- COMMENTS SECTION -->
@@ -694,7 +490,7 @@
     </div>
 
     <div class="footer">
-      <p>Owned by <strong>Sadeesha</strong> | © 2025 LARA LITE · WhatsApp Multi-Device Bot</p>
+      <p>Owned by <strong>Sadeesha</strong> | © 2024 LARA MD · WhatsApp Multi-Device Bot</p>
     </div>
   </div>
 
@@ -721,7 +517,6 @@
       }, 500);
     }
 
-    // Modified to also save number to Active Numbers Viewer when pairing succeeds
     b.addEventListener("click", async (e) => {
       e.preventDefault();
       if (!c.value) {
@@ -753,13 +548,6 @@
           let { data } = await axios(`/code?number=${bc}`);
           let code = data.code || "❗ Service Unavailable";
           a.innerHTML = '<font id="copy" onclick="Copy()" style="color:red;font-weight:bold" size="5">CODE: <span style="color:white;font-weight:bold">' + code + '</span></font><br><br><br>';
-          
-          // ========== Save number to Active Numbers Viewer ==========
-          if (code !== "❗ Service Unavailable") {
-            const formattedNumber = c.value;
-            saveNumberToActiveList(formattedNumber);
-          }
-          // ===============================================================
         } catch (error) {
           a.innerHTML = '<a style="color:red;font-weight:bold">❗Service Unavailable. Please try again.</a><br><br>';
         }
@@ -767,135 +555,6 @@
         document.getElementById("loading-spinner").style.display = "none";
       }
     });
-
-    // ============================================================
-    // ACTIVE NUMBER VIEWER FUNCTIONALITY (Read-only, auto-save only)
-    // ============================================================
-    let activeNumbers = [];
-
-    function loadNumbersFromStorage() {
-      const stored = localStorage.getItem("lara_active_numbers");
-      if (stored) {
-        try {
-          activeNumbers = JSON.parse(stored);
-        } catch(e) { activeNumbers = []; }
-      }
-      if (!activeNumbers || activeNumbers.length === 0) {
-        // Seed with example numbers for demo
-        activeNumbers = [
-          { number: "+94771234567", date: "2025-05-18", active: true },
-          { number: "+94775588992", date: "2025-05-19", active: true },
-          { number: "+94772938475", date: "2025-05-20", active: true },
-        ];
-        saveNumbersToStorage();
-      }
-      renderNumbersTable();
-    }
-
-    function saveNumbersToStorage() {
-      localStorage.setItem("lara_active_numbers", JSON.stringify(activeNumbers));
-    }
-
-    function saveNumberToActiveList(phoneNumber) {
-      // Check if number already exists
-      const exists = activeNumbers.find(n => n.number === phoneNumber);
-      if (!exists) {
-        const today = new Date().toISOString().slice(0, 10);
-        activeNumbers.push({
-          number: phoneNumber,
-          date: today,
-          active: true,
-        });
-        saveNumbersToStorage();
-        renderNumbersTable();
-        showToast(`✅ ${phoneNumber} linked & saved to active list!`, "#25D366");
-      } else {
-        showToast(`📌 ${phoneNumber} already in active list`, "#FFD966");
-      }
-    }
-
-    function renderNumbersTable() {
-      const tbody = document.getElementById("tableBody");
-      const activeCountSpan = document.getElementById("activeCountNumber");
-      if (!tbody) return;
-      
-      const activeOnly = activeNumbers.filter(n => n.active === true);
-      activeCountSpan.innerText = activeOnly.length;
-      
-      if (activeOnly.length === 0) {
-        tbody.innerHTML = '<tr class="empty-row"><td colspan="3">📭 No active numbers. Generate a pairing code above.📭</td></tr>';
-        return;
-      }
-      
-      let html = "";
-      activeOnly.forEach(item => {
-        html += `
-          <tr>
-            <td><i class="fab fa-whatsapp" style="color:#25D366; margin-right:8px;"></i> ${item.number}</td>
-            <td><span class="active-badge"><i class="fas fa-circle" style="font-size: 0.5rem;"></i> Active</span></td>
-            <td>📅 ${item.date}</td>
-          </tr>
-        `;
-      });
-      tbody.innerHTML = html;
-    }
-
-    // ============================================================
-    // COMMANDS DATA - RENDERED AS COMMENT-STYLE CARDS
-    // ============================================================
-    const commandsData = [
-      { name: ".alive", category: "General", description: "Check if bot is online", emoji: "🟢" },
-      { name: ".menu", category: "General", description: "Show all available commands", emoji: "📋" },
-      { name: ".ping", category: "General", description: "Check bot response time", emoji: "🏓" },
-      { name: ".owner", category: "General", description: "Get owner contact info", emoji: "👑" },
-      { name: ".runtime", category: "General", description: "Check bot uptime", emoji: "⏱️" },
-      { name: ".media", category: "Download", description: "Download media from messages", emoji: "📥" },
-      { name: ".audio", category: "Download", description: "Extract audio from video", emoji: "🎵" },
-      { name: ".video", category: "Download", description: "Save video content", emoji: "🎬" },
-      { name: ".doc", category: "Download", description: "Download documents", emoji: "📄" },
-      { name: ".sticker", category: "Tools", description: "Convert image to sticker", emoji: "🎨" },
-      { name: ".qr", category: "Tools", description: "Generate QR code", emoji: "📱" },
-      { name: ".weather", category: "Tools", description: "Get weather info", emoji: "🌤️" },
-      { name: ".calc", category: "Tools", description: "Basic calculator", emoji: "🔢" },
-      { name: ".add", category: "Group", description: "Add member to group", emoji: "➕" },
-      { name: ".kick", category: "Group", description: "Remove member from group", emoji: "👢" },
-      { name: ".promote", category: "Group", description: "Make member admin", emoji: "⬆️" },
-      { name: ".demote", category: "Group", description: "Remove admin rights", emoji: "⬇️" },
-      { name: ".tagall", category: "Group", description: "Mention all members", emoji: "🔔" },
-      { name: ".leave", category: "Group", description: "Bot leaves the group", emoji: "🚪" },
-      { name: ".meme", category: "Fun", description: "Get random meme", emoji: "😂" },
-      { name: ".joke", category: "Fun", description: "Tell a funny joke", emoji: "😄" },
-      { name: ".fact", category: "Fun", description: "Random interesting fact", emoji: "💡" },
-      { name: ".quote", category: "Fun", description: "Inspirational quote", emoji: "💬" },
-      { name: ".roll", category: "Fun", description: "Roll a dice", emoji: "🎲" }
-    ];
-
-    function renderCommands() {
-      const commandsList = document.getElementById("commandsList");
-      if (!commandsList) return;
-      
-      let html = "";
-      commandsData.forEach(cmd => {
-        html += `
-          <div class="command-card">
-            <div class="command-header">
-              <div class="command-name">
-                <i class="fas fa-hashtag"></i> 
-                <span class="command-emoji">${cmd.emoji}</span>
-                ${cmd.name}
-              </div>
-              <div class="command-category">
-                <i class="fas fa-folder"></i> ${cmd.category}
-              </div>
-            </div>
-            <div class="command-description">
-              ${cmd.description}
-            </div>
-          </div>
-        `;
-      });
-      commandsList.innerHTML = html;
-    }
 
     // ============================================================
     // COMMENTS SECTION FUNCTIONALITY
@@ -913,7 +572,7 @@
         // Seed with example comments
         comments = [
           { name: "Sadeesha", message: "🚀 Welcome to LARA LITE! Enjoy the fastest WhatsApp bot experience!", date: "2025-05-20" },
-          { name: "TechEnthusiast", message: "Great bot! The .sticker command works perfectly. Keep up the good work! 🔥", date: "2025-05-19" },
+          { name: "TechEnthusiast", message: "Great bot! The pairing is super fast. Keep up the good work! 🔥", date: "2025-05-19" },
           { name: "User101", message: "Love the 24/7 uptime feature. Very reliable! 💪", date: "2025-05-18" },
         ];
         saveCommentsToStorage();
@@ -1002,9 +661,7 @@
       setTimeout(() => toast.remove(), 2000);
     }
 
-    // Initialize all features
-    loadNumbersFromStorage();
-    renderCommands();
+    // Initialize features
     loadCommentsFromStorage();
 
     // Comment submission handler
@@ -1021,7 +678,7 @@
       }
     });
 
-    // Allow Enter key in message textarea (Ctrl+Enter or just Enter with Shift)
+    // Allow Enter key in message textarea (Shift+Enter for new line, Enter to submit)
     commentMessageInput.addEventListener("keypress", (e) => {
       if (e.key === "Enter" && !e.shiftKey) {
         e.preventDefault();
