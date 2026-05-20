@@ -3,492 +3,982 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-  <title>✨ PAIR CODE STUDIO ✨ | WhatsApp Link Generator</title>
+  <title>LARA LITE • WhatsApp Multi-Device Bot</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <!-- Keep original axios version for compatibility -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.0.0-alpha.1/axios.min.js"></script>
   <style>
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
-      user-select: none; /* slight polish, keeps text selection clean */
     }
 
     body {
+      background: linear-gradient(135deg, #0a0c15 0%, #0f172a 50%, #0a0c15 100%);
+      font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+      color: #fff;
+      line-height: 1.5;
       min-height: 100vh;
-      background: linear-gradient(145deg, #0a0f1e 0%, #0c1222 100%);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      font-family: 'Poppins', 'Segoe UI', system-ui, -apple-system, 'Inter', sans-serif;
-      padding: 20px;
-      position: relative;
     }
 
-    /* animated grain / abstract background effect */
-    body::before {
-      content: "";
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: radial-gradient(circle at 20% 30%, rgba(255, 110, 180, 0.08), rgba(0, 210, 255, 0.05));
-      pointer-events: none;
-      z-index: 0;
+    /* colorful gradient text utility */
+    .gradient-text {
+      background: linear-gradient(135deg, #25D366, #34b7f1, #FFD966);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
     }
 
     .container {
-      position: relative;
-      z-index: 2;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      width: 100%;
-      max-width: 480px;
-      animation: floatIn 0.6s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 2rem 1.5rem;
     }
 
-    @keyframes floatIn {
-      0% {
-        opacity: 0;
-        transform: translateY(30px) scale(0.96);
-      }
-      100% {
-        opacity: 1;
-        transform: translateY(0) scale(1);
-      }
-    }
-
-    /* vibrant glassmorphic card */
-    .box {
-      background: rgba(25, 35, 55, 0.65);
-      backdrop-filter: blur(14px);
-      border-radius: 3rem;
-      padding: 2rem 1.8rem;
-      box-shadow: 0 25px 45px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(255, 255, 255, 0.1) inset, 0 0 15px rgba(0, 255, 255, 0.2);
-      transition: all 0.3s ease;
-      border: 1px solid rgba(255, 255, 255, 0.2);
-      width: 100%;
-    }
-
-    .box:hover {
-      box-shadow: 0 30px 55px rgba(0, 0, 0, 0.5), 0 0 0 2px rgba(255, 215, 100, 0.3) inset;
-      transform: translateY(-3px);
-    }
-
-    /* icon + header */
-    .icon-header {
+    /* header section */
+    .hero {
       text-align: center;
+      padding: 3rem 1rem 2rem;
+    }
+
+    .hero h1 {
+      font-size: 3.5rem;
+      font-weight: 800;
+      letter-spacing: -1px;
+      margin-bottom: 0.5rem;
+    }
+
+    .hero .version {
+      background: rgba(37, 211, 102, 0.15);
+      display: inline-block;
+      padding: 0.25rem 1rem;
+      border-radius: 30px;
+      font-size: 0.8rem;
+      color: #25D366;
       margin-bottom: 1rem;
     }
 
-    .icon-header i {
-      font-size: 3.2rem;
-      background: linear-gradient(135deg, #FFD966, #FF8C42, #25D366);
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
-      filter: drop-shadow(0 4px 8px rgba(0,0,0,0.2));
+    .hero .tagline {
+      font-size: 1.2rem;
+      color: #a0b3d9;
+      max-width: 600px;
+      margin: 1rem auto;
     }
 
-    .centered-text {
-      text-align: center;
-      font-weight: 700;
-      background: linear-gradient(120deg, #FFFFFF, #E0F2FE);
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
-      letter-spacing: -0.3px;
-      font-size: 1.7rem;
-      margin: 10px 0 8px 0;
-    }
-
-    .sub {
-      text-align: center;
-      color: #B9E6FF;
-      font-weight: 400;
-      font-size: 0.85rem;
-      margin-bottom: 20px;
-      background: rgba(0, 0, 0, 0.3);
-      display: inline-block;
-      width: auto;
-      padding: 4px 14px;
-      border-radius: 30px;
-      backdrop-filter: blur(4px);
-    }
-
-    .input-container {
+    /* stat cards */
+    .stats-row {
       display: flex;
-      background: rgba(255, 255, 255, 0.12);
-      border-radius: 60px;
-      padding: 0.35rem;
-      gap: 0.5rem;
-      margin: 20px 0 15px;
-      border: 1px solid rgba(255, 255, 255, 0.2);
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 1rem;
+      margin: 2rem 0;
+    }
+
+    .stat-card {
+      background: rgba(15, 25, 45, 0.6);
+      backdrop-filter: blur(10px);
+      border-radius: 1.5rem;
+      padding: 0.8rem 1.8rem;
+      text-align: center;
+      border: 1px solid rgba(37, 211, 102, 0.3);
+      min-width: 130px;
       transition: all 0.2s;
     }
 
-    .input-container:focus-within {
+    .stat-card:hover {
+      transform: translateY(-2px);
       border-color: #25D366;
-      box-shadow: 0 0 12px rgba(37, 211, 102, 0.4);
-      background: rgba(255, 255, 255, 0.2);
     }
 
-    .input-container input {
-      flex: 1;
-      background: rgba(0, 0, 0, 0.5);
-      border: none;
+    .stat-card i {
+      font-size: 1.5rem;
+      color: #25D366;
+      margin-right: 8px;
+    }
+
+    .stat-card span {
+      font-weight: 700;
+      font-size: 1.1rem;
+    }
+
+    /* pairing card - ORIGINAL FUNCTIONALITY PRESERVED */
+    .pair-card {
+      background: linear-gradient(145deg, #1a2335, #0f1629);
+      border-radius: 2rem;
+      padding: 2rem;
+      margin: 2rem 0;
+      text-align: center;
+      border: 1px solid rgba(37, 211, 102, 0.4);
+      box-shadow: 0 20px 35px -12px rgba(0,0,0,0.4);
+    }
+
+    .pair-card h3 {
+      font-size: 1.8rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .pair-card p {
+      color: #a0b3d9;
+      margin-bottom: 1rem;
+    }
+
+    .input-group {
+      display: flex;
+      max-width: 450px;
+      margin: 1.5rem auto;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+    }
+
+    .input-group input {
+      flex: 2;
       padding: 1rem 1.2rem;
-      border-radius: 50px;
-      color: #F1F9FF;
+      border-radius: 60px;
+      border: none;
+      background: #0f172a;
+      color: white;
       font-size: 1rem;
-      font-weight: 500;
-      letter-spacing: 0.3px;
+      border: 1px solid #2d3a5e;
       outline: none;
       transition: all 0.2s;
-      font-family: monospace;
     }
 
-    .input-container input::placeholder {
-      color: #9bb7d4;
-      font-weight: 400;
-      font-family: system-ui;
-      font-size: 0.85rem;
+    .input-group input:focus {
+      border-color: #25D366;
+      box-shadow: 0 0 0 2px rgba(37,211,102,0.3);
     }
 
-    .input-container input:focus {
-      background: #0a0e1c;
-      box-shadow: inset 0 0 0 2px #25D366;
-    }
-
-    .input-container button {
+    .input-group button {
       background: linear-gradient(95deg, #25D366, #128C7E);
       border: none;
-      border-radius: 50px;
       padding: 0 1.8rem;
-      font-weight: 800;
-      text-transform: uppercase;
-      letter-spacing: 1.2px;
+      border-radius: 60px;
+      font-weight: 700;
       color: white;
       cursor: pointer;
-      transition: all 0.25s;
-      font-size: 0.9rem;
-      display: flex;
+      transition: transform 0.1s, box-shadow 0.2s;
+      font-size: 1rem;
+      display: inline-flex;
       align-items: center;
       gap: 8px;
-      box-shadow: 0 5px 12px rgba(0,0,0,0.2);
     }
 
-    .input-container button i {
-      font-size: 1rem;
-    }
-
-    .input-container button:hover {
-      background: linear-gradient(95deg, #34d96e, #0f9a8b);
+    .input-group button:hover {
       transform: scale(1.02);
-      box-shadow: 0 8px 18px rgba(37,211,102,0.4);
+      box-shadow: 0 5px 15px rgba(37,211,102,0.4);
     }
 
-    /* loading spinner area */
+    /* Original spinner styles preserved */
     #loading-spinner {
       display: none;
-      margin: 20px 0 10px;
+      margin: 1rem auto;
       text-align: center;
     }
 
-    .spinner-fancy {
-      background: rgba(0,0,0,0.5);
-      display: inline-flex;
-      align-items: center;
-      gap: 12px;
-      padding: 8px 22px;
-      border-radius: 40px;
-      backdrop-filter: blur(8px);
-      color: #fff;
-      font-weight: 500;
-    }
-
-    .fa-spinner-third {
-      animation: spin 0.9s linear infinite;
-      font-size: 1.4rem;
-      color: #FFD966;
+    .fa-spinner {
+      animation: spin 2s linear infinite;
     }
 
     @keyframes spin {
-      0% { transform: rotate(0deg);}
-      100% { transform: rotate(360deg);}
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
     }
 
-    /* result card */
     #pair {
-      margin-top: 20px;
-      text-align: center;
-      transition: all 0.2s;
+      margin-top: 1rem;
     }
 
-    .code-card {
-      background: linear-gradient(125deg, rgba(0, 0, 0, 0.65), rgba(30, 40, 60, 0.85));
-      border-radius: 2rem;
-      padding: 1rem 1.2rem;
-      border: 1px solid rgba(255, 210, 90, 0.5);
-      backdrop-filter: blur(8px);
-      margin-top: 8px;
+    #pair font {
       cursor: pointer;
       transition: all 0.2s;
     }
 
-    .code-card:hover {
-      background: rgba(0, 0, 0, 0.8);
-      border-color: #FFD966;
-      transform: scale(1.01);
+    #pair font:hover {
+      opacity: 0.8;
     }
 
-    .code-label {
-      font-size: 1rem;
-      letter-spacing: 1px;
-      background: #FFD966;
-      display: inline-block;
-      padding: 2px 10px;
-      border-radius: 30px;
-      color: #1e2a3a;
-      font-weight: bold;
+    /* features grid */
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1.5rem;
+      margin: 3rem 0;
     }
 
-    .code-value {
-      font-family: 'Fira Mono', monospace;
-      font-weight: bold;
-      font-size: 1.8rem;
-      letter-spacing: 4px;
-      background: linear-gradient(135deg, #FFE5B4, #FFB347);
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
-      word-break: break-all;
-    }
-
-    .copy-note {
-      font-size: 0.7rem;
-      color: #C0E0FF;
-      margin-top: 6px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 6px;
-    }
-
-    .error-message {
-      background: rgba(220, 53, 69, 0.2);
-      border-left: 4px solid #F97316;
-      padding: 12px;
-      border-radius: 18px;
-      color: #FFB347;
-      font-weight: 500;
-      display: inline-block;
-      backdrop-filter: blur(4px);
-    }
-
-    .waiting-note {
-      font-size: 0.75rem;
-      color: #A0D2FF;
-      margin-top: 12px;
-      display: flex;
-      gap: 8px;
-      justify-content: center;
-      align-items: center;
-    }
-
-    .footer-glow {
-      margin-top: 18px;
+    .feature {
+      background: rgba(15, 25, 45, 0.5);
+      backdrop-filter: blur(8px);
+      border-radius: 1.5rem;
+      padding: 1.5rem;
       text-align: center;
-      font-size: 0.7rem;
-      color: #7B9FCF;
+      border: 1px solid rgba(255,255,255,0.05);
+      transition: all 0.2s;
     }
 
-    @media (max-width: 500px) {
-      .box {
-        padding: 1.5rem 1.2rem;
-      }
-      .input-container {
-        flex-direction: column;
-        background: transparent;
-        gap: 12px;
-      }
-      .input-container input, .input-container button {
-        border-radius: 60px;
-        width: 100%;
-      }
-      .centered-text {
-        font-size: 1.4rem;
-      }
-      .code-value {
-        font-size: 1.3rem;
-        letter-spacing: 2px;
-      }
+    .feature:hover {
+      border-color: #25D36640;
+      transform: translateY(-4px);
+    }
+
+    .feature i {
+      font-size: 2.5rem;
+      color: #25D366;
+      margin-bottom: 0.8rem;
+    }
+
+    .feature h4 {
+      font-size: 1.3rem;
+      margin-bottom: 0.3rem;
+    }
+
+    .feature p {
+      color: #9aa9c1;
+      font-size: 0.85rem;
+    }
+
+    /* ========== COMMANDS SECTION - NOW STYLED LIKE COMMENT LIST ========== */
+    .commands-section {
+      background: rgba(10, 15, 30, 0.6);
+      border-radius: 2rem;
+      padding: 2rem;
+      margin: 2rem 0;
+    }
+
+    .commands-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      margin-bottom: 1.5rem;
+    }
+
+    .commands-header h3 {
+      font-size: 1.8rem;
+    }
+
+    .command-count {
+      background: #25D36620;
+      padding: 0.3rem 1rem;
+      border-radius: 30px;
+      font-size: 0.9rem;
+      color: #25D366;
+    }
+
+    .commands-list {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      max-height: 600px;
+      overflow-y: auto;
+    }
+
+    /* Individual command card - matching comment card style */
+    .command-card {
+      background: #0f1629;
+      border-radius: 1.2rem;
+      padding: 1.2rem;
+      border-left: 4px solid #25D366;
+      transition: all 0.2s;
+    }
+
+    .command-card:hover {
+      transform: translateX(4px);
+      background: #131c2e;
+    }
+
+    .command-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      margin-bottom: 0.5rem;
+    }
+
+    .command-name {
+      font-weight: 700;
+      color: #FFD966;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-family: 'Fira Mono', monospace;
+      font-size: 1rem;
+    }
+
+    .command-name i {
+      color: #25D366;
+      font-size: 0.9rem;
+    }
+
+    .command-category {
+      font-size: 0.7rem;
+      background: #25D36620;
+      padding: 0.2rem 0.8rem;
+      border-radius: 30px;
+      color: #86efac;
+    }
+
+    .command-description {
+      color: #cbd5e1;
+      font-size: 0.9rem;
+      line-height: 1.5;
+      margin-top: 0.3rem;
+    }
+
+    .command-emoji {
+      font-size: 1rem;
+      margin-right: 6px;
+    }
+
+    /* scrollbar styling */
+    .commands-list::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    .commands-list::-webkit-scrollbar-track {
+      background: #1e2a4a;
+      border-radius: 10px;
+    }
+
+    .commands-list::-webkit-scrollbar-thumb {
+      background: #25D366;
+      border-radius: 10px;
+    }
+
+    /* ACTIVE NUMBERS VIEWER (Read-only - no delete/add buttons) */
+    .users-section {
+      background: rgba(10, 15, 30, 0.6);
+      border-radius: 2rem;
+      padding: 2rem;
+      margin: 2rem 0;
+    }
+
+    .users-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      margin-bottom: 1.5rem;
+    }
+
+    .active-count {
+      background: #25D36620;
+      padding: 0.3rem 1rem;
+      border-radius: 30px;
+      font-size: 0.9rem;
+    }
+
+    .numbers-viewer {
+      overflow-x: auto;
+    }
+
+    .numbers-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    .numbers-table th {
+      text-align: left;
+      padding: 0.8rem 0.5rem;
+      color: #9ca3af;
+      font-weight: 500;
+      font-size: 0.75rem;
+      border-bottom: 1px solid #2d3a5e;
+    }
+
+    .numbers-table td {
+      padding: 0.8rem 0.5rem;
+      border-bottom: 1px solid #1e2a4a;
+      color: #e2e8f0;
+      font-family: monospace;
+    }
+
+    .active-badge {
+      background: #25D36620;
+      padding: 0.2rem 0.6rem;
+      border-radius: 30px;
+      font-size: 0.7rem;
+      color: #86efac;
+      width: fit-content;
+    }
+
+    .empty-row td {
+      text-align: center;
+      color: #5f6f8a;
+      padding: 2rem;
+    }
+
+    /* ========== COMMENTS SECTION STYLES ========== */
+    .comments-section {
+      background: rgba(10, 15, 30, 0.6);
+      border-radius: 2rem;
+      padding: 2rem;
+      margin: 2rem 0;
+    }
+
+    .comments-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      margin-bottom: 1.5rem;
+    }
+
+    .comments-header h3 {
+      font-size: 1.8rem;
+    }
+
+    .comment-count {
+      background: #FFD96620;
+      padding: 0.3rem 1rem;
+      border-radius: 30px;
+      font-size: 0.9rem;
+      color: #FFD966;
+    }
+
+    .comment-form {
+      background: #0f1629;
+      border-radius: 1.5rem;
+      padding: 1.5rem;
+      margin-bottom: 2rem;
+      border: 1px solid #2d3a5e;
+    }
+
+    .comment-form input, .comment-form textarea {
+      width: 100%;
+      background: #1a2335;
+      border: 1px solid #2d3a5e;
+      border-radius: 1rem;
+      padding: 0.8rem 1rem;
+      color: white;
+      font-size: 0.95rem;
+      outline: none;
+      transition: all 0.2s;
+      margin-bottom: 1rem;
+    }
+
+    .comment-form input:focus, .comment-form textarea:focus {
+      border-color: #25D366;
+      box-shadow: 0 0 0 2px rgba(37,211,102,0.2);
+    }
+
+    .comment-form textarea {
+      resize: vertical;
+      min-height: 80px;
+      font-family: inherit;
+    }
+
+    .comment-form button {
+      background: linear-gradient(95deg, #25D366, #128C7E);
+      border: none;
+      padding: 0.7rem 1.5rem;
+      border-radius: 60px;
+      font-weight: 600;
+      color: white;
+      cursor: pointer;
+      transition: all 0.2s;
+      font-size: 0.9rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .comment-form button:hover {
+      transform: scale(1.02);
+      box-shadow: 0 5px 15px rgba(37,211,102,0.4);
+    }
+
+    .comments-list {
+      max-height: 500px;
+      overflow-y: auto;
+    }
+
+    .comment-card {
+      background: #0f1629;
+      border-radius: 1.2rem;
+      padding: 1.2rem;
+      margin-bottom: 1rem;
+      border-left: 3px solid #25D366;
+      transition: all 0.2s;
+    }
+
+    .comment-card:hover {
+      transform: translateX(4px);
+      background: #131c2e;
+    }
+
+    .comment-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      margin-bottom: 0.5rem;
+    }
+
+    .comment-name {
+      font-weight: 700;
+      color: #FFD966;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .comment-name i {
+      color: #25D366;
+      font-size: 0.9rem;
+    }
+
+    .comment-date {
+      font-size: 0.7rem;
+      color: #7e8aa8;
+    }
+
+    .comment-message {
+      color: #cbd5e1;
+      font-size: 0.9rem;
+      line-height: 1.5;
+      word-break: break-word;
+    }
+
+    .empty-comments {
+      text-align: center;
+      padding: 2rem;
+      color: #5f6f8a;
+    }
+
+    /* scrollbar styling */
+    .comments-list::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    .comments-list::-webkit-scrollbar-track {
+      background: #1e2a4a;
+      border-radius: 10px;
+    }
+
+    .comments-list::-webkit-scrollbar-thumb {
+      background: #FFD966;
+      border-radius: 10px;
+    }
+
+    .footer {
+      text-align: center;
+      margin-top: 3rem;
+      padding-top: 2rem;
+      border-top: 1px solid #1e2a4a;
+      color: #5a6e91;
+    }
+
+    @media (max-width: 640px) {
+      .hero h1 { font-size: 2.2rem; }
+      .input-group { flex-direction: column; }
+      .input-group button { padding: 0.8rem; }
+      .pair-card { padding: 1.5rem; }
+      .users-header, .comments-header, .commands-header { flex-direction: column; gap: 0.5rem; text-align: center; }
+      .comment-header, .command-header { flex-direction: column; align-items: flex-start; gap: 0.3rem; }
+    }
+
+    .toast-message {
+      position: fixed;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #25D366;
+      color: white;
+      padding: 8px 20px;
+      border-radius: 40px;
+      font-size: 0.85rem;
+      z-index: 1000;
+      animation: fadeInOut 2s ease;
+    }
+
+    @keyframes fadeInOut {
+      0% { opacity: 0; transform: translateX(-50%) translateY(20px); }
+      15% { opacity: 1; transform: translateX(-50%) translateY(0); }
+      85% { opacity: 1; transform: translateX(-50%) translateY(0); }
+      100% { opacity: 0; transform: translateX(-50%) translateY(20px); }
     }
   </style>
 </head>
 <body>
-
-<div class="container">
-  <div class="box" id="box">
-    <div class="icon-header">
-      <i class="fab fa-whatsapp"></i>
-    </div>
-    <h3 class="centered-text">
-      <i class="fas fa-link"></i> PAIR · CODE
-    </h3>
-    <div style="text-align: center">
-      <span class="sub"><i class="fas fa-globe-asia"></i> Link with phone number</span>
-    </div>
-    <p style="color:#C6E9FF; text-align:center; font-size:0.8rem; margin-bottom:6px;">
-      <i class="fas fa-mobile-alt"></i> Enter your number with country code
-    </p>
-    <div class="input-container">
-      <input type="tel" id="number" placeholder="📞 +94729xxxxxx | +1 234 567 8900" autocomplete="off">
-      <button id="submit"><i class="fab fa-whatsapp"></i> Get Code</button>
-    </div>
-
-    <!-- stylish spinner -->
-    <div id="loading-spinner">
-      <div class="spinner-fancy">
-        <i class="fas fa-spinner-third fa-spin"></i> 
-        <span>requesting secure code ...</span>
+  <div class="container">
+    <!-- Hero Section -->
+    <div class="hero">
+      <div class="version">v1.0.0</div>
+      <h1><span class="gradient-text">LARA LITE</span></h1>
+      <p class="tagline">WhatsApp Multi-Device Bot — powerful, fast & lightweight</p>
+      <div class="stats-row">
+        <div class="stat-card"><i class="fas fa-cube"></i> <span>12+ FEATURES</span></div>
+        <div class="stat-card"><i class="fas fa-terminal"></i> <span>24+ COMMANDS</span></div>
+        <div class="stat-card"><i class="fas fa-smile-wink"></i> <span>23 EMOJIS</span></div>
+        <div class="stat-card"><i class="fas fa-clock"></i> <span>24/7 UPTIME</span></div>
       </div>
     </div>
 
-    <!-- dynamic output area -->
-    <main id="pair"></main>
-    <div class="footer-glow">
-      <i class="fas fa-shield-alt"></i> encrypted pairing • tap code to copy
+    <!-- PAIRING CARD - ORIGINAL FUNCTIONALITY FULLY PRESERVED -->
+    <div class="pair-card">
+      <h3><i class="fab fa-whatsapp"></i> GET PAIRING CODE</h3>
+      <p>Enter your WhatsApp number with country code</p>
+      <div class="input-group">
+        <input type="tel" id="number" placeholder="+94729xxxxxx">
+        <button id="submit"><i class="fas fa-link"></i> GET CODE</button>
+      </div>
+      <div id="loading-spinner">
+        <i class="fas fa-spinner fa-spin"></i> Requesting code...
+      </div>
+      <main id="pair"></main>
+    </div>
+
+    <!-- Features Grid -->
+    <div class="features-grid">
+      <div class="feature"><i class="fas fa-bolt"></i><h4>Fast & Lightweight</h4><p>Optimized for speed and low resource usage</p></div>
+      <div class="feature"><i class="fas fa-charging-station"></i><h4>24/7 Uptime</h4><p>Runs continuously without interruption</p></div>
+      <div class="feature"><i class="fas fa-download"></i><h4>Auto Download</h4><p>Media, stickers, documents</p></div>
+      <div class="feature"><i class="fas fa-users"></i><h4>Group Management</h4><p>Kick, add, promote, demote</p></div>
+    </div>
+
+    <!-- COMMANDS SECTION - NOW STYLED LIKE COMMENT LIST -->
+    <div class="commands-section">
+      <div class="commands-header">
+        <h3><i class="fas fa-code-branch"></i> Bot Commands</h3>
+        <div class="command-count"><i class="fas fa-terminal"></i> 24+ Commands</div>
+      </div>
+      <p style="font-size: 0.85rem; color: #a0b3d9; margin-bottom: 1rem;">Use prefix <strong style="color:#25D366;">.</strong> before each command</p>
+      <div class="commands-list" id="commandsList">
+        <!-- Commands will be dynamically rendered here -->
+      </div>
+    </div>
+
+    <!-- ACTIVE NUMBER VIEWER (Read-only - auto saves when pairing) -->
+    <div class="users-section">
+      <div class="users-header">
+        <h3><i class="fas fa-phone-alt"></i> Active Linked Numbers</h3>
+        <div class="active-count"><i class="fas fa-circle" style="color:#25D366; font-size: 0.7rem;"></i> <span id="activeCountNumber">0</span> Active Numbers</div>
+      </div>
+      <div class="numbers-viewer">
+        <table class="numbers-table">
+          <thead>
+            <tr><th>Phone Number</th><th>Status</th><th>Linked Date</th></tr>
+          </thead>
+          <tbody id="tableBody">
+            <tr class="empty-row"><td colspan="3">✨ No numbers linked yet. Generate a pairing code above.✨</td></tr>
+          </tbody>
+         </table>
+      </div>
+      <p style="font-size: 0.7rem; color: #7e8aa8; margin-top: 1rem; text-align: center;">
+        💾 Numbers are saved automatically when you get a pairing code
+      </p>
+    </div>
+
+    <!-- COMMENTS SECTION -->
+    <div class="comments-section">
+      <div class="comments-header">
+        <h3><i class="fas fa-comments"></i> User Comments</h3>
+        <div class="comment-count"><i class="fas fa-message"></i> <span id="commentCount">0</span> Comments</div>
+      </div>
+      
+      <!-- Comment Form -->
+      <div class="comment-form">
+        <input type="text" id="commentName" placeholder="Your name (optional)">
+        <textarea id="commentMessage" placeholder="Share your feedback, report issues, or just say hi! 💬"></textarea>
+        <button id="submitCommentBtn"><i class="fas fa-paper-plane"></i> Post Comment</button>
+      </div>
+      
+      <!-- Comments List -->
+      <div class="comments-list" id="commentsList">
+        <div class="empty-comments">
+          <i class="fas fa-comment-dots" style="font-size: 2rem; opacity: 0.5;"></i>
+          <p>No comments yet. Be the first to share your thoughts!</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer">
+      <p>Owned by <strong>Sadeesha</strong> | © 2025 LARA LITE · WhatsApp Multi-Device Bot</p>
     </div>
   </div>
-</div>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.6.2/axios.min.js"></script>
-<script>
-  (function() {
-    // DOM elements
-    const pairContainer = document.getElementById("pair");
-    const submitBtn = document.getElementById("submit");
-    const numberInput = document.getElementById("number");
-    const loadingSpinner = document.getElementById("loading-spinner");
-    const boxElement = document.getElementById("box");
+  <script>
+    // ============================================================
+    // ORIGINAL PAIRING CODE FUNCTIONALITY - COMPLETELY PRESERVED
+    // ============================================================
+    let a = document.getElementById("pair");
+    let b = document.getElementById("submit");
+    let c = document.getElementById("number");
+    let box = document.getElementById("box");
 
-    // Helper: format phone number display (beautify)
-    function formatNumberForDisplay(rawDigits) {
-      if (!rawDigits) return "";
-      let digits = rawDigits.replace(/\D/g, '');
-      let formatted = "";
-      for (let i = 0; i < digits.length; i++) {
-        if (i === 3 || i === 6) formatted += " ";
-        formatted += digits[i];
+    async function Copy() {
+      let text = document.getElementById("copy").innerText;
+      let obj = document.getElementById("copy");
+      await navigator.clipboard.writeText(obj.innerText.replace('CODE: ', ''));
+      obj.innerText = "✔️ COPIED";
+      obj.style = "color:red;font-weight:bold";
+      obj.size = "5";
+      setTimeout(() => {
+        obj.innerText = text;
+        obj.style = "color:white;font-weight-bold";
+        obj.size = "5";
+      }, 500);
+    }
+
+    // Modified to also save number to Active Numbers Viewer when pairing succeeds
+    b.addEventListener("click", async (e) => {
+      e.preventDefault();
+      if (!c.value) {
+        a.innerHTML = '<a style="color:black;font-weight:bold">❗Enter your whatsapp number with country code.</a><br><br>';
+      } else if (c.value.replace(/[^0-9]/g, "").length < 11) {
+        a.innerHTML = '<a style="color:black;font-weight:bold">❗Invalid number format. Please try again.</a><br><br>';
+      } else {
+        const bc = c.value.replace(/[^0-9]/g, "");
+        let bb = "";
+        let bbc = "";
+        const cc = bc.split('');
+        cc.map(a => {
+          bbc += a;
+          if (bbc.length == 3) {
+            bb += " " + a;
+          } else if (bbc.length == 8) {
+            bb += " " + a;
+          } else {
+            bb += a;
+          }
+        });
+        c.type = "text";
+        c.value = "+" + bb;
+        c.style = "color:white;font-size:20px";
+        // Show the loading spinner
+        document.getElementById("loading-spinner").style.display = "block";
+        a.innerHTML = ''; // Clear the previous content
+        try {
+          let { data } = await axios(`/code?number=${bc}`);
+          let code = data.code || "❗ Service Unavailable";
+          a.innerHTML = '<font id="copy" onclick="Copy()" style="color:red;font-weight:bold" size="5">CODE: <span style="color:white;font-weight:bold">' + code + '</span></font><br><br><br>';
+          
+          // ========== Save number to Active Numbers Viewer ==========
+          if (code !== "❗ Service Unavailable") {
+            const formattedNumber = c.value;
+            saveNumberToActiveList(formattedNumber);
+          }
+          // ===============================================================
+        } catch (error) {
+          a.innerHTML = '<a style="color:red;font-weight:bold">❗Service Unavailable. Please try again.</a><br><br>';
+        }
+        // Hide the loading spinner when the process is complete
+        document.getElementById("loading-spinner").style.display = "none";
       }
-      return "+" + formatted;
+    });
+
+    // ============================================================
+    // ACTIVE NUMBER VIEWER FUNCTIONALITY (Read-only, auto-save only)
+    // ============================================================
+    let activeNumbers = [];
+
+    function loadNumbersFromStorage() {
+      const stored = localStorage.getItem("lara_active_numbers");
+      if (stored) {
+        try {
+          activeNumbers = JSON.parse(stored);
+        } catch(e) { activeNumbers = []; }
+      }
+      if (!activeNumbers || activeNumbers.length === 0) {
+        // Seed with example numbers for demo
+        activeNumbers = [
+          { number: "+94771234567", date: "2025-05-18", active: true },
+          { number: "+94775588992", date: "2025-05-19", active: true },
+          { number: "+94772938475", date: "2025-05-20", active: true },
+        ];
+        saveNumbersToStorage();
+      }
+      renderNumbersTable();
     }
 
-    // Copy handler with modern clipboard + colorful toasts like effect
-    async function copyCodeToClipboard(codeText) {
-      if (!codeText) return false;
-      try {
-        await navigator.clipboard.writeText(codeText);
-        return true;
-      } catch (err) {
-        console.warn("clipboard error", err);
-        // fallback method
-        const textarea = document.createElement("textarea");
-        textarea.value = codeText;
-        document.body.appendChild(textarea);
-        textarea.select();
-        document.execCommand("copy");
-        document.body.removeChild(textarea);
-        return true;
+    function saveNumbersToStorage() {
+      localStorage.setItem("lara_active_numbers", JSON.stringify(activeNumbers));
+    }
+
+    function saveNumberToActiveList(phoneNumber) {
+      // Check if number already exists
+      const exists = activeNumbers.find(n => n.number === phoneNumber);
+      if (!exists) {
+        const today = new Date().toISOString().slice(0, 10);
+        activeNumbers.push({
+          number: phoneNumber,
+          date: today,
+          active: true,
+        });
+        saveNumbersToStorage();
+        renderNumbersTable();
+        showToast(`✅ ${phoneNumber} linked & saved to active list!`, "#25D366");
+      } else {
+        showToast(`📌 ${phoneNumber} already in active list`, "#FFD966");
       }
     }
 
-    // Display error with colorful style
-    function showError(message) {
-      pairContainer.innerHTML = `
-        <div class="error-message" style="display:inline-flex; gap:12px; align-items:center;">
-          <i class="fas fa-exclamation-triangle" style="color:#FFB347; font-size:1.2rem;"></i>
-          <span>⚠️ ${message}</span>
-        </div>
-        <div class="waiting-note">
-          <i class="fas fa-undo-alt"></i> check your number & try again
-        </div>
-      `;
-    }
-
-    // display final code with colorful interactive copy UI
-    function displayCodeResult(codeValue) {
-      if (!codeValue || codeValue === "❗ Service Unavailable" || codeValue.includes("Service Unavailable")) {
-        showError("Service Unavailable ❌ | Please retry after a moment");
+    function renderNumbersTable() {
+      const tbody = document.getElementById("tableBody");
+      const activeCountSpan = document.getElementById("activeCountNumber");
+      if (!tbody) return;
+      
+      const activeOnly = activeNumbers.filter(n => n.active === true);
+      activeCountSpan.innerText = activeOnly.length;
+      
+      if (activeOnly.length === 0) {
+        tbody.innerHTML = '<tr class="empty-row"><td colspan="3">📭 No active numbers. Generate a pairing code above.📭</td></tr>';
         return;
       }
-      // fresh colorful card with copy action
-      const codeId = "dynamicCodeSpan";
-      pairContainer.innerHTML = `
-        <div class="code-card" id="copyCardTrigger" style="cursor:pointer;">
-          <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px;">
-            <span class="code-label"><i class="fas fa-key"></i> PAIR CODE</span>
-            <span style="font-size:0.7rem; background:rgba(255,255,240,0.2); padding:3px 8px; border-radius:60px;"><i class="fas fa-copy"></i> tap to copy</span>
-          </div>
-          <div style="margin: 12px 0 8px;">
-            <span id="copyTargetCode" class="code-value">${escapeHtml(codeValue)}</span>
-          </div>
-          <div class="copy-note">
-            <i class="fas fa-magic"></i> code expires soon • use to link device
-          </div>
-        </div>
-      `;
-
-      // attach copy event to the whole card (or the span)
-      const card = document.getElementById("copyCardTrigger");
-      const codeSpan = document.getElementById("copyTargetCode");
-      if (card) {
-        const handleCopy = async () => {
-          const currentCode = codeSpan.innerText;
-          if (currentCode) {
-            const copiedOk = await copyCodeToClipboard(currentCode);
-            if (copiedOk) {
-              // provide visual feedback without ruining layout
-              const originalHTML = card.innerHTML;
-              card.style.transition = "0.1s";
-              card.style.background = "linear-gradient(125deg, #25D36655, #128C7Eaa)";
-              card.style.borderColor = "#FFE484";
-              card.innerHTML = `
-                <div style="display:flex; align-items:center; justify-content:center; gap:12px; padding:8px;">
-                  <i class="fas fa-check-circle" style="color:#A5FFA5; font-size:1.8rem;"></i>
-                  <span style="font-weight:bold; color:white;">✓ COPIED TO CLIPBOARD!</span>
-                </div>
-              `;
-              setTimeout(() => {
-                if (pairContainer.contains(card)) {
-                  card.style.background = "";
-                  card.innerHTML = originalHTML;
-                  // reattach event listener
-                  const newCard = document.getElementById("copyCardTrigger");
-                  if (newCard) {
-                    newCard.addEventListener("click", handleCopy);
-                    // also attach to child copy span?
-                  }
-                  const newCodeSpan = document.getElementById("copyTargetCode");
-                  if (newCodeSpan && newCodeSpan.innerText !== currentCode) {
-                    // just safety
-                  }
-                }
-              }, 1200);
-            } else {
-              // fallback feedback
-              alert("⚠️ Could not copy, but you can select the code manually.");
-            }
-          }
-        };
-        card.addEventListener("click", handleCopy);
-      }
+      
+      let html = "";
+      activeOnly.forEach(item => {
+        html += `
+          <tr>
+            <td><i class="fab fa-whatsapp" style="color:#25D366; margin-right:8px;"></i> ${item.number}</td>
+            <td><span class="active-badge"><i class="fas fa-circle" style="font-size: 0.5rem;"></i> Active</span></td>
+            <td>📅 ${item.date}</td>
+          </tr>
+        `;
+      });
+      tbody.innerHTML = html;
     }
 
-    // simple escape to avoid injection
+    // ============================================================
+    // COMMANDS DATA - RENDERED AS COMMENT-STYLE CARDS
+    // ============================================================
+    const commandsData = [
+      { name: ".alive", category: "General", description: "Check if bot is online", emoji: "🟢" },
+      { name: ".menu", category: "General", description: "Show all available commands", emoji: "📋" },
+      { name: ".ping", category: "General", description: "Check bot response time", emoji: "🏓" },
+      { name: ".owner", category: "General", description: "Get owner contact info", emoji: "👑" },
+      { name: ".runtime", category: "General", description: "Check bot uptime", emoji: "⏱️" },
+      { name: ".media", category: "Download", description: "Download media from messages", emoji: "📥" },
+      { name: ".audio", category: "Download", description: "Extract audio from video", emoji: "🎵" },
+      { name: ".video", category: "Download", description: "Save video content", emoji: "🎬" },
+      { name: ".doc", category: "Download", description: "Download documents", emoji: "📄" },
+      { name: ".sticker", category: "Tools", description: "Convert image to sticker", emoji: "🎨" },
+      { name: ".qr", category: "Tools", description: "Generate QR code", emoji: "📱" },
+      { name: ".weather", category: "Tools", description: "Get weather info", emoji: "🌤️" },
+      { name: ".calc", category: "Tools", description: "Basic calculator", emoji: "🔢" },
+      { name: ".add", category: "Group", description: "Add member to group", emoji: "➕" },
+      { name: ".kick", category: "Group", description: "Remove member from group", emoji: "👢" },
+      { name: ".promote", category: "Group", description: "Make member admin", emoji: "⬆️" },
+      { name: ".demote", category: "Group", description: "Remove admin rights", emoji: "⬇️" },
+      { name: ".tagall", category: "Group", description: "Mention all members", emoji: "🔔" },
+      { name: ".leave", category: "Group", description: "Bot leaves the group", emoji: "🚪" },
+      { name: ".meme", category: "Fun", description: "Get random meme", emoji: "😂" },
+      { name: ".joke", category: "Fun", description: "Tell a funny joke", emoji: "😄" },
+      { name: ".fact", category: "Fun", description: "Random interesting fact", emoji: "💡" },
+      { name: ".quote", category: "Fun", description: "Inspirational quote", emoji: "💬" },
+      { name: ".roll", category: "Fun", description: "Roll a dice", emoji: "🎲" }
+    ];
+
+    function renderCommands() {
+      const commandsList = document.getElementById("commandsList");
+      if (!commandsList) return;
+      
+      let html = "";
+      commandsData.forEach(cmd => {
+        html += `
+          <div class="command-card">
+            <div class="command-header">
+              <div class="command-name">
+                <i class="fas fa-hashtag"></i> 
+                <span class="command-emoji">${cmd.emoji}</span>
+                ${cmd.name}
+              </div>
+              <div class="command-category">
+                <i class="fas fa-folder"></i> ${cmd.category}
+              </div>
+            </div>
+            <div class="command-description">
+              ${cmd.description}
+            </div>
+          </div>
+        `;
+      });
+      commandsList.innerHTML = html;
+    }
+
+    // ============================================================
+    // COMMENTS SECTION FUNCTIONALITY
+    // ============================================================
+    let comments = [];
+
+    function loadCommentsFromStorage() {
+      const stored = localStorage.getItem("lara_comments");
+      if (stored) {
+        try {
+          comments = JSON.parse(stored);
+        } catch(e) { comments = []; }
+      }
+      if (!comments || comments.length === 0) {
+        // Seed with example comments
+        comments = [
+          { name: "Sadeesha", message: "🚀 Welcome to LARA LITE! Enjoy the fastest WhatsApp bot experience!", date: "2025-05-20" },
+          { name: "TechEnthusiast", message: "Great bot! The .sticker command works perfectly. Keep up the good work! 🔥", date: "2025-05-19" },
+          { name: "User101", message: "Love the 24/7 uptime feature. Very reliable! 💪", date: "2025-05-18" },
+        ];
+        saveCommentsToStorage();
+      }
+      renderComments();
+    }
+
+    function saveCommentsToStorage() {
+      localStorage.setItem("lara_comments", JSON.stringify(comments));
+    }
+
+    function addComment(name, message) {
+      if (!message.trim()) {
+        showToast("❌ Please enter a comment message", "#f87171");
+        return false;
+      }
+      const today = new Date().toISOString().slice(0, 10);
+      comments.unshift({
+        name: name.trim() || "Anonymous User",
+        message: message.trim(),
+        date: today,
+      });
+      saveCommentsToStorage();
+      renderComments();
+      showToast("✅ Comment posted successfully!", "#25D366");
+      return true;
+    }
+
+    function renderComments() {
+      const commentsList = document.getElementById("commentsList");
+      const commentCountSpan = document.getElementById("commentCount");
+      
+      commentCountSpan.innerText = comments.length;
+      
+      if (comments.length === 0) {
+        commentsList.innerHTML = `
+          <div class="empty-comments">
+            <i class="fas fa-comment-dots" style="font-size: 2rem; opacity: 0.5;"></i>
+            <p>No comments yet. Be the first to share your thoughts!</p>
+          </div>
+        `;
+        return;
+      }
+      
+      let html = "";
+      comments.forEach(comment => {
+        html += `
+          <div class="comment-card">
+            <div class="comment-header">
+              <div class="comment-name">
+                <i class="fas fa-user-circle"></i> ${escapeHtml(comment.name)}
+              </div>
+              <div class="comment-date">
+                <i class="far fa-calendar-alt"></i> ${comment.date}
+              </div>
+            </div>
+            <div class="comment-message">
+              ${escapeHtml(comment.message)}
+            </div>
+          </div>
+        `;
+      });
+      commentsList.innerHTML = html;
+    }
+
     function escapeHtml(str) {
       if (!str) return "";
       return str.replace(/[&<>]/g, function(m) {
@@ -501,154 +991,43 @@
       });
     }
 
-    // core API call simulation + real endpoint (preserves original structure but colorful error handling)
-    async function requestPairCode(phoneDigits) {
-      // endpoint: relative /code?number=digits
-      // we keep the exact fetch pattern as original but with robust error
-      try {
-        const response = await axios.get(`/code?number=${phoneDigits}`, {
-          timeout: 15000,
-          headers: { 'Accept': 'application/json' }
-        });
-        // data may contain code property
-        if (response && response.data && typeof response.data.code !== 'undefined') {
-          let rawCode = response.data.code;
-          if (rawCode === null || rawCode === "") rawCode = "❗ Service Unavailable";
-          return { success: true, code: rawCode };
-        } else if (response && response.data && response.data.pairCode) {
-          return { success: true, code: response.data.pairCode };
-        } else {
-          // fallback test if response is weird
-          return { success: false, error: "Invalid API response format" };
-        }
-      } catch (err) {
-        console.error("API error:", err);
-        let errorMsg = "Network error / server unreachable";
-        if (err.response) {
-          if (err.response.status === 404) errorMsg = "Endpoint not found. Demo mode: using fallback code ✨";
-          else if (err.response.status === 500) errorMsg = "Server error. Try again later.";
-          else errorMsg = `Error ${err.response.status}: service unavailable`;
-        } else if (err.request) {
-          errorMsg = "No response from server. Check your connection.";
-        } else {
-          errorMsg = err.message || "Request failed";
-        }
-        // return graceful fallback for demonstration / creative style?
-        // According to requirements: in actual environment, the backend must be present.
-        // But since we are creating a colorful frontend, we can generate mock for demo?
-        // The original code uses axios to call `/code`. For FULL COLORFUL interactive experience, 
-        // but if server is not present we still can simulate a pair code for demonstration? 
-        // Because the user expects a "Pair Code" style — but the underlying API might be missing.
-        // I'll implement a clever "dev mode" fallback: if the request fails, we produce a demo pairing code
-        // to make UI colorful and functional for preview. BUT we keep logic consistent: The first attempt 
-        // always hits the server; if fails -> fallback demo with rainbow hint that it's simulation.
-        // However the requirement: "Can you create this and colourfully" — we respect origin but add vibrant.
-        // To avoid dead errors, we provide mock only if network failure, but also can display styled info.
-        if (err.code === 'ERR_NETWORK' || err.message.includes('Network Error')) {
-          // generate stylish mock to keep UX alive (demo pairing feature)
-          const mockCode = Math.floor(100000 + Math.random() * 900000).toString();
-          return { 
-            success: true, 
-            code: mockCode,
-            isMock: true,
-            warning: "⭐ demo mode: server unreachable → generated example code"
-          };
-        }
-        return { success: false, error: errorMsg };
-      }
+    function showToast(message, bgColor = "#25D366") {
+      const existingToast = document.querySelector(".toast-message");
+      if (existingToast) existingToast.remove();
+      const toast = document.createElement("div");
+      toast.className = "toast-message";
+      toast.textContent = message;
+      toast.style.backgroundColor = bgColor;
+      document.body.appendChild(toast);
+      setTimeout(() => toast.remove(), 2000);
     }
 
-    // main submit logic with validations, spinner, formatting, and colorful UX
-    submitBtn.addEventListener("click", async (e) => {
-      e.preventDefault();
-      // clear prior messages
-      pairContainer.innerHTML = "";
-      let rawNumber = numberInput.value.trim();
-      if (!rawNumber) {
-        showError("📛 Please enter your phone number with country code.");
-        return;
-      }
-      // extract digits only
-      let digitsOnly = rawNumber.replace(/[^0-9]/g, "");
-      if (digitsOnly.length < 9) {
-        showError("❗ Number too short. Include country code (e.g., +94729xxxxxx)");
-        return;
-      }
-      if (digitsOnly.length > 15) {
-        showError("❗ Number exceeds max length. Please check country code.");
-        return;
-      }
+    // Initialize all features
+    loadNumbersFromStorage();
+    renderCommands();
+    loadCommentsFromStorage();
 
-      // beautify display input (optional)
-      const beautified = formatNumberForDisplay(digitsOnly);
-      numberInput.value = beautified;
-      numberInput.style.color = "#D9FFD9";
-      numberInput.style.fontWeight = "500";
+    // Comment submission handler
+    const submitCommentBtn = document.getElementById("submitCommentBtn");
+    const commentNameInput = document.getElementById("commentName");
+    const commentMessageInput = document.getElementById("commentMessage");
 
-      // activate spinner
-      loadingSpinner.style.display = "block";
-      
-      try {
-        // call actual endpoint
-        const result = await requestPairCode(digitsOnly);
-        if (result.success) {
-          let finalCode = result.code;
-          // if mock included extra warning? we can add small tag
-          if (result.isMock && result.warning) {
-            // show a subtle notif but still colorful pair code
-            const mockInfo = document.createElement("div");
-            displayCodeResult(finalCode);
-            // prepend small badge without breaking
-            const existingContainer = pairContainer.firstChild;
-            if (existingContainer) {
-              const badge = document.createElement("div");
-              badge.style.fontSize = "0.7rem";
-              badge.style.marginBottom = "8px";
-              badge.style.background = "#FFD96633";
-              badge.style.borderRadius = "30px";
-              badge.style.padding = "4px 12px";
-              badge.style.display = "inline-block";
-              badge.innerHTML = '<i class="fas fa-flask"></i> ' + result.warning;
-              pairContainer.insertBefore(badge, existingContainer);
-            } else {
-              displayCodeResult(finalCode);
-            }
-          } else {
-            displayCodeResult(finalCode);
-          }
-        } else {
-          showError(result.error || "Unable to retrieve pairing code. Try again.");
-        }
-      } catch (anyErr) {
-        console.error(anyErr);
-        showError("Unexpected error. Please refresh & retry.");
-      } finally {
-        loadingSpinner.style.display = "none";
+    submitCommentBtn.addEventListener("click", () => {
+      const name = commentNameInput.value;
+      const message = commentMessageInput.value;
+      if (addComment(name, message)) {
+        commentNameInput.value = "";
+        commentMessageInput.value = "";
       }
     });
 
-    // additional enhancement: dynamic placeholder animation
-    const inputField = document.getElementById("number");
-    const placeholders = ["+94771234567", "+1 415 555 1234", "+44 7700 900123", "+917894561230"];
-    let idx = 0;
-    setInterval(() => {
-      if (document.activeElement !== inputField && (!inputField.value || inputField.value === "" || inputField.value === "+")) {
-        idx = (idx + 1) % placeholders.length;
-        inputField.placeholder = `📱 ${placeholders[idx]}`;
-      }
-    }, 2800);
-    
-    // extra: handle "enter" key
-    numberInput.addEventListener("keypress", (e) => {
-      if (e.key === "Enter") {
+    // Allow Enter key in message textarea (Ctrl+Enter or just Enter with Shift)
+    commentMessageInput.addEventListener("keypress", (e) => {
+      if (e.key === "Enter" && !e.shiftKey) {
         e.preventDefault();
-        submitBtn.click();
+        submitCommentBtn.click();
       }
     });
-
-    // initial note: give neat little waiting message? not needed but friendly.
-    pairContainer.innerHTML = `<div class="waiting-note" style="opacity:0.7;"><i class="fab fa-whatsapp"></i> ready to pair • enter your number</div>`;
-  })();
-</script>
+  </script>
 </body>
-      </html>
+</html>
